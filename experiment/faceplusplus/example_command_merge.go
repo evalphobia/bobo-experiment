@@ -28,19 +28,19 @@ type MergeCommand struct {
 	whitelist map[string]struct{}
 }
 
-func (MergeCommand) GetMentionCommand() string {
+func (*MergeCommand) GetMentionCommand() string {
 	return "merge"
 }
 
-func (MergeCommand) GetHelp() string {
+func (*MergeCommand) GetHelp() string {
 	return "Merge face images by Face++"
 }
 
-func (MergeCommand) HasHelp() bool {
+func (*MergeCommand) HasHelp() bool {
 	return true
 }
 
-func (MergeCommand) GetRegexp() *regexp.Regexp {
+func (*MergeCommand) GetRegexp() *regexp.Regexp {
 	return nil
 }
 
@@ -67,13 +67,13 @@ func (m *MergeCommand) runMergeFace(d command.CommandData) {
 	switch {
 	case m.isInBlacklist(d.SenderName),
 		!m.isInWhitelist(d.SenderName):
-		command.NewReplyEngineTask(d.Engine, d.Channel, "No!").Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, "No!").Run()
 		return
 	}
 
 	url := strings.Fields(d.TextOther)
 	if len(url) < 2 {
-		command.NewReplyEngineTask(d.Engine, d.Channel, "Set Two URLs").Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, "Set Two URLs").Run()
 		return
 	}
 
@@ -83,20 +83,24 @@ func (m *MergeCommand) runMergeFace(d command.CommandData) {
 	switch {
 	case !strings.HasPrefix(url1, "http"),
 		!strings.HasPrefix(url2, "http"):
-		command.NewReplyEngineTask(d.Engine, d.Channel, "Invalid URL. It must begin with [http/https]").Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, "Invalid URL. It must begin with [http/https]").Run()
 		return
 	}
 
-	command.NewReplyEngineTask(d.Engine, d.Channel, "Merging...").Run()
+	_ = command.NewReplyEngineTask(d.Engine, d.Channel, "Merging...").Run()
 
 	resp, err := mergeFaceImage(url2, url1, m.getMergeRate())
 	if err != nil {
-		command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("[ERROR] [mergeFaceImage] `%s`", err.Error())).Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("[ERROR] [mergeFaceImage] `%s`", err.Error())).Run()
 		return
 	}
 
 	buf := bytes.NewBuffer(resp)
-	command.NewUploadEngineTask(d.Engine, d.Channel, buf, "result.jpg").Run()
+	err = command.NewUploadEngineTask(d.Engine, d.Channel, buf, "result.jpg").Run()
+	if err != nil {
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("[ERROR] [NewUploadEngineTask] `%s`", err.Error())).Run()
+		return
+	}
 }
 
 func (m *MergeCommand) isInBlacklist(name string) bool {

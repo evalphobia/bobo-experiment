@@ -44,30 +44,30 @@ func (a AWSCostCommand) runAWSCost(d command.CommandData) {
 	// e.g.) AWS_ACCESS_KEY_ID is empty
 	if err := validateCloudWatchClient(); err != nil {
 		errMessage := fmt.Sprintf("[ERROR]\t[validateCloudWatchClient]\t`%s`", err.Error())
-		command.NewReplyEngineTask(d.Engine, d.Channel, errMessage).Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, errMessage).Run()
 		return
 	}
 
 	// Use date from the message, or use yesterday.
 	endTime, err := getEndTime(d.TextOther)
 	if err != nil {
-		command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("Invalid date format: [%s]", d.TextOther)).Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("Invalid date format: [%s]", d.TextOther)).Run()
 		return
 	}
 
 	// Get costs of the target services.
-	command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("Getting costs on [%s]...", endTime.Format("2006-01-02"))).Run()
+	_ = command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("Getting costs on [%s]...", endTime.Format("2006-01-02"))).Run()
 	targetSerivces := a.getServices()
 	costs, err := fetchAllCosts(endTime, targetSerivces)
 	if err != nil {
 		errMessage := fmt.Sprintf("[ERROR]\t[fetchAllCosts]\t`%s`", err.Error())
-		command.NewReplyEngineTask(d.Engine, d.Channel, errMessage).Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, errMessage).Run()
 		return
 	}
 
 	// format costs data for Slack message
 	msg := costs.formatAsOutputReport(endTime)
-	command.NewReplyEngineTask(d.Engine, d.Channel, msg).Run()
+	_ = command.NewReplyEngineTask(d.Engine, d.Channel, msg).Run()
 }
 
 // Return given date of 23:59:59.
