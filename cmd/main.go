@@ -8,6 +8,7 @@ import (
 
 	"github.com/evalphobia/bobo-experiment/experiment/aws"
 	"github.com/evalphobia/bobo-experiment/experiment/faceplusplus"
+	"github.com/evalphobia/bobo-experiment/experiment/google"
 )
 
 // Entry Point
@@ -34,6 +35,7 @@ func main() {
 				UseWhitelist: false,
 				Whitelist:    nil,
 			},
+			google.CalendarCommand,
 		),
 	})
 }
