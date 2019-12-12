@@ -2,6 +2,7 @@ package faceplusplus
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"regexp"
 	"strings"
@@ -139,8 +140,12 @@ func mergeFaceImage(fromURL, toURL string, mergeRate int) ([]byte, error) {
 		MergeURL:    fromURL,
 		MergeRate:   mergeRate,
 	})
-	if err != nil {
+	switch {
+	case err != nil:
 		return nil, err
+	case resp.ErrorMessage != "":
+		return nil, errors.New(resp.ErrorMessage)
 	}
+
 	return resp.GetResultImage()
 }
