@@ -35,6 +35,14 @@ func main() {
 				UseWhitelist: false,
 				Whitelist:    nil,
 			},
+			&faceplusplus.MergeTargetCommand{
+				TargetName: "obama",
+				TargetURLs: []string{
+					"https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg",
+					"https://upload.wikimedia.org/wikipedia/commons/c/c6/Official_portrait_of_Barack_Obama-2.jpg",
+					"https://www.obamalibrary.gov/sites/default/files/uploads/portals/the-obamas-potus.jpg",
+				},
+			},
 			google.CalendarCommand,
 			google.WhereCommand,
 		),
