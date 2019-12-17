@@ -5,6 +5,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/evalphobia/bobo-experiment/i18n"
 )
 
 type Costs struct {
@@ -48,7 +50,7 @@ func (c Costs) formatAsOutputReport(endTime time.Time) string {
 
 	results := make([]string, 0, len(svc)*2)
 	results = append(results, "```")
-	results = append(results, fmt.Sprintf("[AWS Estimate Costs] %s", endTime.Format("2006-01-02")))
+	results = append(results, i18n.Message("[AWS Estimate Costs] %s", endTime.Format("2006-01-02")))
 	results = append(results, fmt.Sprintf("- Total:\t$%.2f", c.Total))
 	results = append(results, "------------------------")
 	for _, kv := range kvList {

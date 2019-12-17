@@ -13,6 +13,7 @@ import (
 
 	"github.com/eure/bobo/command"
 	"github.com/eure/bobo/library"
+	"github.com/evalphobia/bobo-experiment/i18n"
 )
 
 // To use Calendar Command, you should setup, (1) Credentials for Google API (2) OAuth Token for Calendar.
@@ -42,7 +43,7 @@ var CalendarCommand = command.BasicCommandTemplate{
 		}
 
 		// fetch events from google calendar
-		command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("Getting events of [%s] ...", email)).Run()
+		command.NewReplyEngineTask(d.Engine, d.Channel, i18n.Message("Getting events of [%s] ...", email)).Run()
 		list, err := calendarCli.EventList(email, 10)
 		if err != nil {
 			errMessage := fmt.Sprintf("[ERROR]\t[EventList]\t`%s`", err.Error())
@@ -80,7 +81,7 @@ func getEmailAddress(d command.CommandData) (string, error) {
 		// Validate to correct email format
 		e, err := mail.ParseAddress(text)
 		if err != nil {
-			return "", errors.New("Target format is invalid, use @mention or correct email address.")
+			return "", errors.New(i18n.Message("Target format is invalid, use @mention or correct email address."))
 		}
 		return e.Address, nil
 	}
@@ -104,7 +105,7 @@ func formatCalendarAsSlackMessage(list []calendar.Event) string {
 		// add datetime
 		switch {
 		case ev.IsAllDayEvent:
-			msg = append(msg, fmt.Sprintf("【AllDay】[%s - %s]", formatLocalDate(ev.StartTime), formatLocalDate(ev.EndTime)))
+			msg = append(msg, i18n.Message("[AllDay] [%s - %s]", formatLocalDate(ev.StartTime), formatLocalDate(ev.EndTime)))
 		default:
 			msg = append(msg, fmt.Sprintf("[%s - %s]", formatLocalDateTime(ev.StartTime), formatLocalTime(ev.EndTime)))
 		}

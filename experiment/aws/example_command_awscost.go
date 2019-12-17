@@ -8,6 +8,7 @@ import (
 
 	"github.com/evalphobia/aws-sdk-go-wrapper/cloudwatch"
 	"github.com/evalphobia/aws-sdk-go-wrapper/config"
+	"github.com/evalphobia/bobo-experiment/i18n"
 
 	"github.com/eure/bobo/command"
 )
@@ -51,12 +52,12 @@ func (a AWSCostCommand) runAWSCost(d command.CommandData) {
 	// Use date from the message, or use yesterday.
 	endTime, err := getEndTime(d.TextOther)
 	if err != nil {
-		_ = command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("Invalid date format: [%s]", d.TextOther)).Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, i18n.Message("Invalid date format: [%s]", d.TextOther)).Run()
 		return
 	}
 
 	// Get costs of the target services.
-	_ = command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("Getting costs on [%s]...", endTime.Format("2006-01-02"))).Run()
+	_ = command.NewReplyEngineTask(d.Engine, d.Channel, i18n.Message("Getting costs on [%s]...", endTime.Format("2006-01-02"))).Run()
 	targetSerivces := a.getServices()
 	costs, err := fetchAllCosts(endTime, targetSerivces)
 	if err != nil {

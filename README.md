@@ -63,10 +63,13 @@ SLACK_RTM_TOKEN=xoxb-0000... ./bin/bobo
 | `SLACK_BOT_TOKEN` | [Slack Bot Token](https://slack.com/apps/A0F7YS25R-bots) |
 | `SLACK_TOKEN` | [Slack Bot Token](https://slack.com/apps/A0F7YS25R-bots) |
 | `BOBO_DEBUG` | Flag for debug logging. Set [boolean like value](https://golang.org/pkg/strconv/#ParseBool). |
+| `BOBO_LANG` | Language setting for bot. Set it as [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). |
 | `AWS_ACCESS_KEY_ID` | [AWS Access Key ID](https://github.com/aws/aws-sdk-go/blob/bef02444773a49eaf30cdd615920b56896827c06/aws/credentials/env_provider.go) |
 | `AWS_SECRET_ACCESS_KEY` | [AWS Secret Access Key](https://github.com/aws/aws-sdk-go/blob/bef02444773a49eaf30cdd615920b56896827c06/aws/credentials/env_provider.go) |
 | `FACEPP_API_KEY` | [API Key of Face++](https://github.com/evalphobia/go-face-plusplus). |
 | `FACEPP_API_SECRET` | [API Secret of Face++](https://github.com/evalphobia/go-face-plusplus). |
+| `GOOGLE_API_OAUTH_CREDENTIALS` | [Google API OAuth credentials path](https://developers.google.com/calendar/quickstart/go). |
+| `GOOGLE_API_OAUTH_TOKEN_FILE` | [Google API OAuth Token path](https://developers.google.com/calendar/quickstart/go). |
 
 
 
@@ -76,3 +79,6 @@ SLACK_RTM_TOKEN=xoxb-0000... ./bin/bobo
     - Cost
 - Face++
     - MergeFace
+- Google
+    - Calendar
+    - Where

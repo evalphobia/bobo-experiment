@@ -36,6 +36,7 @@ func main() {
 				Whitelist:    nil,
 			},
 			google.CalendarCommand,
+			google.WhereCommand,
 		),
 	})
 }

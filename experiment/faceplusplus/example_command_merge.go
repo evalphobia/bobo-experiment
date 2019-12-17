@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 	"sync"
 
@@ -13,6 +14,7 @@ import (
 
 	"github.com/eure/bobo/command"
 	"github.com/eure/bobo/library"
+	"github.com/evalphobia/bobo-experiment/i18n"
 )
 
 var _ command.CommandTemplate = &MergeCommand{}
@@ -68,13 +70,13 @@ func (m *MergeCommand) runMergeFace(d command.CommandData) {
 	switch {
 	case m.isInBlacklist(d.SenderName),
 		!m.isInWhitelist(d.SenderName):
-		_ = command.NewReplyEngineTask(d.Engine, d.Channel, "No!").Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, i18n.Message("No!")).Run()
 		return
 	}
 
 	url := strings.Fields(d.TextOther)
 	if len(url) < 2 {
-		_ = command.NewReplyEngineTask(d.Engine, d.Channel, "Set Two URLs").Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, i18n.Message("Set Two URLs")).Run()
 		return
 	}
 
@@ -84,13 +86,19 @@ func (m *MergeCommand) runMergeFace(d command.CommandData) {
 	switch {
 	case !strings.HasPrefix(url1, "http"),
 		!strings.HasPrefix(url2, "http"):
-		_ = command.NewReplyEngineTask(d.Engine, d.Channel, "Invalid URL. It must begin with [http/https]").Run()
+		_ = command.NewReplyEngineTask(d.Engine, d.Channel, i18n.Message("Invalid URL. It must begin with [http/https]")).Run()
 		return
 	}
 
-	_ = command.NewReplyEngineTask(d.Engine, d.Channel, "Merging...").Run()
+	_ = command.NewReplyEngineTask(d.Engine, d.Channel, i18n.Message("Merging...")).Run()
 
-	resp, err := mergeFaceImage(url2, url1, m.getMergeRate())
+	var mergeRate int
+	if len(url) >= 3 {
+		mergeRateStr := url[2]
+		mergeRate, _ = strconv.Atoi(mergeRateStr)
+	}
+
+	resp, err := mergeFaceImage(url2, url1, m.getMergeRate(mergeRate))
 	if err != nil {
 		_ = command.NewReplyEngineTask(d.Engine, d.Channel, fmt.Sprintf("[ERROR] [mergeFaceImage] `%s`", err.Error())).Run()
 		return
@@ -120,8 +128,11 @@ func (m *MergeCommand) isInWhitelist(name string) bool {
 	return ok
 }
 
-func (m *MergeCommand) getMergeRate() int {
-	if m.MergeRate > 0 {
+func (m *MergeCommand) getMergeRate(mergeRate int) int {
+	switch {
+	case mergeRate > 0:
+		return mergeRate
+	case m.MergeRate > 0:
 		return m.MergeRate
 	}
 	const defaultMergeRate = 75 // 75%
