@@ -77,8 +77,8 @@ SLACK_RTM_TOKEN=xoxb-0000... ./bin/bobo
 
 - AWS
     - Cost
+    - SQS Queue stats
 - Face++
     - MergeFace
 - Google
     - Calendar
-    - Where

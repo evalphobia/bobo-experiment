@@ -24,8 +24,11 @@ func main() {
 			command.GoodMorningCommand,
 			command.ReactEmojiCommand,
 			command.HelpCommand,
-			aws.AWSCostCommand{
+			aws.CostCommand{
 				Services: nil,
+			},
+			aws.SQSCommand{
+				Metrics: nil,
 			},
 			&faceplusplus.MergeCommand{
 				UseBlacklist: true,
