@@ -51,15 +51,18 @@ func NewDatapoints(input cloudwatch.MetricStatisticsInput, list []cloudwatch.Dat
 	}
 
 	name := input.MetricName
-	key := input.Statistics[0]
-
 	data := make([]Datapoint, len(list))
 	for i, p := range list {
 		d := Datapoint{
 			MetricName: name,
 			Time:       p.Timestamp,
 		}
-		if key == "Maximum" {
+		switch {
+		case isMetricForSum(name):
+			d.Value = p.Sum
+		case isMetricForAvg(name):
+			d.Value = p.Average
+		default:
 			d.Value = p.Maximum
 		}
 		data[i] = d
@@ -78,4 +81,35 @@ func (p Datapoints) GetFirstValue() float64 {
 // Return given date of 23:59:59.
 func getEndTime(dt time.Time) time.Time {
 	return time.Date(dt.Year(), dt.Month(), dt.Day(), 23, 59, 59, 0, time.UTC)
+}
+
+func isMetricForSum(metricName string) bool {
+	_, ok := metricsForSum[metricName]
+	return ok
+}
+
+func isMetricForAvg(metricName string) bool {
+	_, ok := metricsForAvg[metricName]
+	return ok
+}
+
+var metricsForSum = map[string]struct{}{
+	"ConditionalCheckFailedRequests":   struct{}{},
+	"ConsumedReadCapacityUnits":        struct{}{},
+	"ConsumedWriteCapacityUnits":       struct{}{},
+	"OnlineIndexConsumedWriteCapacity": struct{}{},
+	"OnlineIndexPercentageProgress":    struct{}{},
+	"OnlineIndexThrottleEvents":        struct{}{},
+	"ReadThrottleEvents":               struct{}{},
+	"ReturnedItemCount":                struct{}{},
+	"SystemErrors":                     struct{}{},
+	"TimeToLiveDeletedItemCount":       struct{}{},
+	"ThrottledRequests":                struct{}{},
+	"TransactionConflict":              struct{}{},
+	"UserErrors":                       struct{}{},
+	"WriteThrottleEvents":              struct{}{},
+}
+
+var metricsForAvg = map[string]struct{}{
+	"SuccessfulRequestLatency": struct{}{},
 }

@@ -33,6 +33,10 @@ func Message(key string, args ...interface{}) string {
 	return defaultPrinter.Sprintf(key, args...)
 }
 
+func CommaNumber(n int) string {
+	return defaultPrinter.Sprintf("%d", n)
+}
+
 var langs = []translation{
 	// AWSCost
 	{Key: "Invalid date format: [%s]", List: []translationData{

@@ -30,6 +30,9 @@ func main() {
 			aws.SQSCommand{
 				Metrics: nil,
 			},
+			aws.DynamoDBCommand{
+				Metrics: nil,
+			},
 			&faceplusplus.MergeCommand{
 				UseBlacklist: true,
 				Blacklist: []string{
