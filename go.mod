@@ -5,7 +5,7 @@ require (
 	github.com/eure/bobo v0.0.1
 	github.com/evalphobia/aws-sdk-go-wrapper v1.9.0
 	github.com/evalphobia/go-face-plusplus v0.1.0
-	github.com/evalphobia/google-api-go-wrapper v0.8.2
+	github.com/evalphobia/google-api-go-wrapper v0.8.3
 	github.com/evalphobia/httpwrapper v0.2.1
 	github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32 // indirect
 	golang.org/x/oauth2 v0.0.0-20191202225959-858c2ad4c8b6 // indirect
@@ -15,5 +15,3 @@ require (
 	gopkg.in/h2non/gentleman-retry.v2 v2.0.1 // indirect
 	gopkg.in/h2non/gentleman.v2 v2.0.3 // indirect
 )
-
-go 1.13

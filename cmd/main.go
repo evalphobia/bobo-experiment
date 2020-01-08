@@ -51,6 +51,7 @@ func main() {
 			},
 			google.CalendarCommand,
 			google.WhereCommand,
+			&google.RoomCommand{},
 		),
 	})
 }
