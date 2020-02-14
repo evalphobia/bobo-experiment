@@ -3,7 +3,8 @@ module github.com/evalphobia/bobo-experiment
 require (
 	github.com/aws/aws-sdk-go v1.26.8 // indirect
 	github.com/eure/bobo v0.0.1
-	github.com/evalphobia/aws-sdk-go-wrapper v1.9.0
+	github.com/evalphobia/aws-sdk-go-wrapper v1.10.0
+	github.com/evalphobia/awscost v0.1.0
 	github.com/evalphobia/go-face-plusplus v0.1.0
 	github.com/evalphobia/google-api-go-wrapper v0.8.3
 	github.com/evalphobia/httpwrapper v0.2.1

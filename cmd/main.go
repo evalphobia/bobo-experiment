@@ -24,7 +24,10 @@ func main() {
 			command.GoodMorningCommand,
 			command.ReactEmojiCommand,
 			command.HelpCommand,
-			aws.CostCommand{
+			// aws.CostCommandByCloudWatch{
+			// 	Services: nil,
+			// },
+			aws.CostCommandByCostExplorer{
 				Services: nil,
 			},
 			aws.SQSCommand{

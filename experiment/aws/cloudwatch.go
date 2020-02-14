@@ -79,6 +79,20 @@ func (p Datapoints) GetFirstValue() float64 {
 }
 
 // Return given date of 23:59:59.
+// If text is empty, return yesterday.
+func getEndTimeFromString(text string) (time.Time, error) {
+	dt := time.Now().In(time.UTC).AddDate(0, 0, -1) // yesterday
+	if text != "" {
+		var err error
+		dt, err = time.Parse("2006-01-02", text)
+		if err != nil {
+			return dt, err
+		}
+	}
+	return getEndTime(dt), nil
+}
+
+// Return given date of 23:59:59.
 func getEndTime(dt time.Time) time.Time {
 	return time.Date(dt.Year(), dt.Month(), dt.Day(), 23, 59, 59, 0, time.UTC)
 }

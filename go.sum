@@ -10,8 +10,10 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/eure/bobo v0.0.1 h1:JJeuhp21MS+g6S2WZMMy0OT8yr3BCrgg2X66PH0w8LA=
 github.com/eure/bobo v0.0.1/go.mod h1:GfT49bmXcMIq8sTAUgq+8+kmVLgdGmZn+1Jm9iEQG5A=
-github.com/evalphobia/aws-sdk-go-wrapper v1.9.0 h1:RYplM+v42SqeyHj5idGnbRX4HUjg///PZahOHJDSaCc=
-github.com/evalphobia/aws-sdk-go-wrapper v1.9.0/go.mod h1:TkayNiFwRHa4b+5qhDfNucvo1rYZmLxxAzXzukzcFA8=
+github.com/evalphobia/aws-sdk-go-wrapper v1.10.0 h1:1hjFZJCpVZn8rRYl3VTRpoKf3NOugqam5tsb3T80HdM=
+github.com/evalphobia/aws-sdk-go-wrapper v1.10.0/go.mod h1:TkayNiFwRHa4b+5qhDfNucvo1rYZmLxxAzXzukzcFA8=
+github.com/evalphobia/awscost v0.1.0 h1:VRSr3TOLveNW8g4zi902dFKiCcxZ6CMHku4HaSS/81Q=
+github.com/evalphobia/awscost v0.1.0/go.mod h1:Zrg4vMLTLFdvodWhBjAJFPA+ttIvAYxbjNYVZrkxi1g=
 github.com/evalphobia/go-face-plusplus v0.1.0 h1:BjpgSvHSA4oK9lbbUm8nQluQEhw5YI+3nbKOAyIOstA=
 github.com/evalphobia/go-face-plusplus v0.1.0/go.mod h1:nus4lZk0Ge4hY+NHzklrmk++3FhSU+gadbchXLHiOKQ=
 github.com/evalphobia/google-api-go-wrapper v0.8.3 h1:oeV98B5FVdRuR3NGZTa0xem5HufrESaHzpazSyMLR/c=
