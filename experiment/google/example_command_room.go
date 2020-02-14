@@ -35,7 +35,7 @@ func (RoomCommand) GetRegexp() *regexp.Regexp {
 	return nil
 }
 
-func (a RoomCommand) Exec(d command.CommandData) {
+func (a *RoomCommand) Exec(d command.CommandData) {
 	c := a.runRoom(d)
 	c.Exec()
 }
