@@ -1,6 +1,8 @@
 package main
 
 import (
+	"regexp"
+
 	"github.com/eure/bobo"
 	"github.com/eure/bobo/command"
 	"github.com/eure/bobo/engine/slack"
@@ -32,6 +34,20 @@ func main() {
 			},
 			aws.SQSCommand{
 				Metrics: nil,
+			},
+			&aws.SQSPurgeCommand{
+				UseBlacklist: true,
+				Blacklist: []string{
+					"funky-queue",
+				},
+				UseWhitelist: true,
+				Whitelist: []string{
+					"temp-queue",
+				},
+				WhitelistRegexp: []*regexp.Regexp{
+					regexp.MustCompile("^test-.*"),
+					regexp.MustCompile("^dev-.*"),
+				},
 			},
 			aws.DynamoDBCommand{
 				Metrics: nil,
