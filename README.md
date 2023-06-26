@@ -70,7 +70,7 @@ SLACK_RTM_TOKEN=xoxb-0000... ./bin/bobo
 | `FACEPP_API_SECRET` | [API Secret of Face++](https://github.com/evalphobia/go-face-plusplus). |
 | `GOOGLE_API_OAUTH_CREDENTIALS` | [Google API OAuth credentials path](https://developers.google.com/calendar/quickstart/go). |
 | `GOOGLE_API_OAUTH_TOKEN_FILE` | [Google API OAuth Token path](https://developers.google.com/calendar/quickstart/go). |
-| `OPENAI_API_KEY` | [Oepn API Key](https://github.com/tmc/langchaingo/blob/7ea734523e39f59ebdec85796d9307573db4fbda/llms/openai/openaillm_option.go#L4) |
+| `OPENAI_API_KEY` | [OepnAI API Key](https://github.com/tmc/langchaingo/blob/7ea734523e39f59ebdec85796d9307573db4fbda/llms/openai/openaillm_option.go#L4) |
 
 
 ## Experimental Commands
@@ -83,4 +83,4 @@ SLACK_RTM_TOKEN=xoxb-0000... ./bin/bobo
 - Google
     - Calendar
 - [LangChain](https://github.com/tmc/langchaingo)
-    - ChatGPT
+    - OpenAI GPT

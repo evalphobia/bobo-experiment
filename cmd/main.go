@@ -72,8 +72,8 @@ func main() {
 			google.CalendarCommand,
 			google.WhereCommand,
 			&google.RoomCommand{},
-			&langchain.ChatGPTCommand{
-				Command: "chatgpt",
+			&langchain.OpenAIGPTCommand{
+				Command: "gpt",
 			},
 		),
 	})

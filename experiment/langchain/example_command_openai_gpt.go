@@ -22,37 +22,37 @@ const (
 	outputKey = "output"
 )
 
-var _ command.CommandTemplate = &ChatGPTCommand{}
+var _ command.CommandTemplate = &OpenAIGPTCommand{}
 
-type ChatGPTCommand struct {
+type OpenAIGPTCommand struct {
 	Command string
 
 	openaiOnce  sync.Once
 	openaiAgent agents.Executor
 }
 
-func (t *ChatGPTCommand) GetMentionCommand() string {
+func (t *OpenAIGPTCommand) GetMentionCommand() string {
 	return t.Command
 }
 
-func (*ChatGPTCommand) GetHelp() string {
-	return "Send text to OepnAI ChatGPT and get answer"
+func (*OpenAIGPTCommand) GetHelp() string {
+	return "Send text to OepnAI GPT and get answer"
 }
 
-func (*ChatGPTCommand) HasHelp() bool {
+func (*OpenAIGPTCommand) HasHelp() bool {
 	return true
 }
 
-func (*ChatGPTCommand) GetRegexp() *regexp.Regexp {
+func (*OpenAIGPTCommand) GetRegexp() *regexp.Regexp {
 	return nil
 }
 
-func (t *ChatGPTCommand) Exec(d command.CommandData) {
+func (t *OpenAIGPTCommand) Exec(d command.CommandData) {
 	c := t.runChat(d)
 	c.Exec()
 }
 
-func (t *ChatGPTCommand) runChat(d command.CommandData) command.Command {
+func (t *OpenAIGPTCommand) runChat(d command.CommandData) command.Command {
 	c := command.Command{}
 
 	text := strings.TrimSpace(d.TextOther)
@@ -92,7 +92,7 @@ func (t *ChatGPTCommand) runChat(d command.CommandData) command.Command {
 	return c
 }
 
-func (t *ChatGPTCommand) getOrCreateClient() (agents.Executor, error) {
+func (t *OpenAIGPTCommand) getOrCreateClient() (agents.Executor, error) {
 	var err error
 	t.openaiOnce.Do(func() {
 		llm, e := openai.NewChat()
