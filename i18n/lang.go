@@ -101,6 +101,38 @@ var langs = []translation{
 	{Key: "[AllDay] [%s - %s]", List: []translationData{
 		{language.Japanese, "【終日】[%s - %s]"},
 	}},
+	{Key: "error: %s", List: []translationData{
+		{language.Japanese, "エラーが発生しました: %s"},
+	}},
+	{Key: "Unexpected response: %+v", List: []translationData{
+		{language.Japanese, "想定外のレスポンスです: %+v"},
+	}},
+	{Key: `Begin!
+{{ if .history }}
+Previous conversation history:
+{{.history}}
+{{ end }}
+
+New input: {{.input}}
+
+{{ if .agent_scratchpad }}
+Thought:{{.agent_scratchpad}}
+{{ end }}`, List: []translationData{
+		{language.Japanese, `開始!ここからの会話は全て日本語で行います。返答は日本語で回答してください。
+ただし回答は必ず "AI:" から始めてください。
+例: AI: こんにちは
+
+{{ if .history }}
+以前のチャット履歴
+{{.history}}
+{{ end }}
+
+新しいインプット: {{.input}}
+
+{{ if .agent_scratchpad }}
+Thought:{{.agent_scratchpad}}
+{{ end }}`},
+	}},
 }
 
 type translation struct {

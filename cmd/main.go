@@ -11,6 +11,7 @@ import (
 	"github.com/evalphobia/bobo-experiment/experiment/aws"
 	"github.com/evalphobia/bobo-experiment/experiment/faceplusplus"
 	"github.com/evalphobia/bobo-experiment/experiment/google"
+	"github.com/evalphobia/bobo-experiment/experiment/langchain"
 )
 
 // Entry Point
@@ -71,6 +72,9 @@ func main() {
 			google.CalendarCommand,
 			google.WhereCommand,
 			&google.RoomCommand{},
+			&langchain.ChatGPTCommand{
+				Command: "chatgpt",
+			},
 		),
 	})
 }
